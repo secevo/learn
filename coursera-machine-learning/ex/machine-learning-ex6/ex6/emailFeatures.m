@@ -9,6 +9,10 @@ n = 1899;
 
 % You need to return the following variables correctly.
 x = zeros(n, 1);
+m =length(word_indices);
+for i=1:m
+    x(word_indices(i))=1;
+end
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return a feature vector for the

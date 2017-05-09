@@ -16,6 +16,18 @@ function centroids = computeCentroids(X, idx, K)
 % You need to return the following variables correctly.
 centroids = zeros(K, n);
 
+for i = 1:K
+    conuter = 0;
+    total = zeros(1, n);
+    for j=1:m
+        if idx(j)==i
+          total = total + X(j,:);
+          conuter = conuter+1;
+        end
+    end
+    centroids(i,:)=total/conuter;
+end
+
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Go over every centroid and compute mean of all points that

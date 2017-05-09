@@ -1,4 +1,4 @@
-function [J grad] = nnCostFunction(nn_params, ...
+function [J, grad] = nnCostFunction(nn_params, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
                                    num_labels, ...
@@ -29,6 +29,35 @@ m = size(X, 1);
 J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
+
+for i = 1:m
+    x = X(i,:);
+    a1 = [1,;x'];
+    z2 = Theta1*a1;
+    a2 = [1;sigmoid(z2)];
+    z3 = Theta2*a2;
+    a3 = sigmoid(z3);
+    yy = zeros(num_labels,1);
+    yy(y(i)) = 1;
+    J = J + sum(-yy.*log(a3)-(1-yy).*log(1-a3));
+    delta3 = a3-yy;
+    temp = (Theta2'*delta3);
+    temp = temp(2:end);
+    delta2 = temp.*sigmoidGradient(z2);
+    Theta1_grad = Theta1_grad+delta2*a1';
+    Theta2_grad = Theta2_grad+delta3*a2';
+end
+J = J/m;
+Theta1_grad = Theta1_grad/m;
+tt1 = [zeros(hidden_layer_size,1),Theta1(:,2:end)];
+Theta1_grad = Theta1_grad+lambda/m*tt1;
+Theta2_grad = Theta2_grad/m;
+tt2 = [zeros(num_labels,1),Theta2(:,2:end)];
+Theta2_grad = Theta2_grad+lambda/m*tt2;
+J = J + lambda/(2*m)*(sum(sum(Theta1(:,2:input_layer_size+1).^2))+sum(sum(Theta2(:,2:hidden_layer_size+1).^2)));
+
+
+
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the

@@ -13,10 +13,13 @@ Theta = reshape(params(num_movies*num_features+1:end), ...
 
             
 % You need to return the following values correctly
-J = 0;
-X_grad = zeros(size(X));
-Theta_grad = zeros(size(Theta));
+%J = 0;
+%X_grad = zeros(size(X));
+%Theta_grad = zeros(size(Theta));
 
+J=0.5* sum(sum(((X*Theta'-Y).*R).^2))+0.5*lambda*sum(sum(Theta.^2))+0.5*lambda*sum(sum(X.^2)); 
+X_grad = ((X*Theta'-Y).*R)*Theta + lambda*X;
+Theta_grad = ((X*Theta'-Y).*R)'*X+lambda*Theta;
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost function and gradient for collaborative
 %               filtering. Concretely, you should first implement the cost
