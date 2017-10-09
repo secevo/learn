@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.In"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.StdOut"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.MinPQ"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.Queue"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.Stack"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.Point2D"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.RectHV"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="edu.princeton.cs.algs4.StdDraw"/>
+</qualifiedTypeNameHistroy>

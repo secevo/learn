@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.1-dev-20150306-5afe4d1" sequence="4" timestamp="1480590182763" analysisTimestamp="1480590182325" release="">
+  <Project projectName="Percolation">
+    <Jar>C:\Users\Fidel\OneDrive\Studying\Algorithms\Assignments\Percolation\bin\Percolation.class</Jar>
+    <AuxClasspathEntry>C:\Users\Fidel\OneDrive\Studying\Algorithms\Assignments\Percolation\bin</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Fidel\OneDrive\Studying\Algorithms\Assignments\algs4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Program Files\Java\jre1.8.0_111\lib\rt.jar</AuxClasspathEntry>
+    <SrcDir>C:\Users\Fidel\OneDrive\Studying\Algorithms\Assignments\Percolation\src</SrcDir>
+    <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Thu, 1 Dec 2016 19:03:02 +0800" total_classes="1" referenced_classes="12" total_bugs="0" total_size="60" num_packages="1" java_version="1.8.0_111" vm_version="25.111-b14" cpu_seconds="1.48" clock_seconds="0.44" peak_mbytes="424.33" alloc_mbytes="1024.00" gc_seconds="0.02">
+    <PackageStats package="" total_bugs="0" total_types="1" total_size="60">
+      <ClassStats class="Percolation" sourceFile="Percolation.java" interface="false" size="60" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="118" invocations="2" avgMicrosecondsPerInvocation="59037" maxMicrosecondsPerInvocation="108097" standardDeviationMircosecondsPerInvocation="49060"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="83" invocations="307" avgMicrosecondsPerInvocation="271" maxMicrosecondsPerInvocation="4799" standardDeviationMircosecondsPerInvocation="492"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="28" invocations="307" avgMicrosecondsPerInvocation="94" maxMicrosecondsPerInvocation="268" standardDeviationMircosecondsPerInvocation="44"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="16" invocations="12" avgMicrosecondsPerInvocation="1368" maxMicrosecondsPerInvocation="6602" standardDeviationMircosecondsPerInvocation="1958"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="13" invocations="68" avgMicrosecondsPerInvocation="196" maxMicrosecondsPerInvocation="851" standardDeviationMircosecondsPerInvocation="179"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="13" invocations="12" avgMicrosecondsPerInvocation="1100" maxMicrosecondsPerInvocation="6356" standardDeviationMircosecondsPerInvocation="1689"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="11" invocations="274" avgMicrosecondsPerInvocation="41" maxMicrosecondsPerInvocation="414" standardDeviationMircosecondsPerInvocation="55"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History>
+    <AppVersion sequence="0" timestamp="1480590098567" release="" codeSize="0" numClasses="0"/>
+    <AppVersion sequence="1" timestamp="1480590098571" release="" codeSize="173" numClasses="4"/>
+    <AppVersion sequence="2" timestamp="1480590147821" release="" codeSize="60" numClasses="1"/>
+    <AppVersion sequence="3" timestamp="1480590164685" release="" codeSize="60" numClasses="1"/>
+  </History>
+</BugCollection>

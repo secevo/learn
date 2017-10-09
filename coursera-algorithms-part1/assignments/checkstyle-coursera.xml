@@ -1,0 +1,737 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <!-- directory where the .java file lives -->
+    <!-- the property "basedir" is passed as a -D command-line option to Java -->
+    <property name="basedir" value="${basedir}" default="/"/>
+
+    <property name="localeCountry" value="US"/>
+    <property name="localeLanguage" value="en"/>
+    <property name="charset" value="UTF-8"/>
+
+    <!-- Checks that no tab characters in the source code. -->
+    <!-- Reports only first instance. -->
+    <module name="FileTabCharacter">
+        <property name="fileExtensions" value="java, toy, txt"/>
+        <property name="eachLine" value="false"/>
+        <message key="containsTab" value="Line contains a tab character. Configure your editor to replace tabs with spaces."/>
+        <message key="file.containsTab" value="File contains tab characters (this is the first instance). Configure your editor to replace tabs with spaces."/>
+    </module>
+
+    <!-- Checks that no file is more than 1500 lines long. -->
+    <module name="FileLength">
+        <property name="max" value="1500"/>
+    </module>
+
+<!-- Seems to flag too many .java files. Not sure why.
+    <module name="NewlineAtEndOfFile">
+        <property name="fileExtensions" value="java, xml, py"/>
+        <property name="lineSeparator" value="lf_cr_crlf"/>
+    </module>
+-->
+
+<!--
+    <module name="Translation"/>
+    <module name="UniqueProperties"/>
+-->
+
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+<!--                   TREEWALKER BEGINS HERE                                    -->
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+
+    <module name="TreeWalker">
+        <property name="tabWidth" value="4"/>
+
+        <!-- =========================================================================== -->
+        <!-- Check for annotations                                                       -->
+        <!-- http://checkstyle.sourceforge.net/config_annotation.html                    -->
+        <!-- =========================================================================== -->
+
+<!--
+        <module name="AnnotationUseStyle"/>
+        <module name="MissingDeprecated"/>
+        <module name="MissingOverride"/>
+        <module name="PackageAnnotation"/>
+        <module name="SuppressWarningsHolder"/>
+        <module name="AnnotationLocation"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Block checks                                                                -->
+        <!-- http://checkstyle.sourceforge.net/config_blocks.html                        -->
+        <!-- =========================================================================== -->
+
+        <module name="EmptyCatchBlock"/>
+
+        <module name="AvoidNestedBlocks">
+            <message key="block.nested" value="Avoid nested blocks: the curly braces serve no purpose."/>
+        </module>
+
+        <module name="NeedBraces">
+            <property name="tokens" value="LITERAL_DO"/>
+        </module>
+
+<!-- 
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+            <message key="block.noStmt" value="A block must have at least one statement."/>
+        </module>
+
+        <module name="LeftCurly"/> 
+        <module name="RightCurly"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Class design                                                                -->
+        <!-- http://checkstyle.sourceforge.net/config_design.html                        -->
+        <!-- =========================================================================== -->
+        <!-- SPECIAL HACK FOR NON-STATIC PUBIC FINAL VARIABLE -->
+        <module name="VisibilityModifier">
+            <property name="publicMemberPattern" value="^SLOPE_ORDER$"/>
+            <message key="variable.notPrivate" value="The instance (or static) variable ''{0}'' must be private."/>
+        </module>
+
+        <module name="InterfaceIsType">
+            <message key="interface.type" value="An interface must describe a type (and have methods)."/>
+        </module>
+        <module name="MutableException"/>
+        <module name="ThrowsCount"/>
+        <module name="OneTopLevelClass">
+            <message key="one.top.level.class" value="The .java file must have exactly one top-level class."/>
+        </module>
+
+<!--
+        <module name="FinalClass"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="DesignForExtension"/>
+        <module name="InnerTypeLast"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Coding violations                                                           -->
+        <!-- http://checkstyle.sourceforge.net/config_coding.html                        -->
+        <!-- =========================================================================== -->
+        <module name="CovariantEquals">
+            <message key="covariant.equals" value="The type of the parameter variable for the ''equals()'' method must be ''Object''."/>
+        </module>
+
+        <module name="EmptyStatement">
+            <message key="empty.statement" value="Are you sure you want an empty statement here? An empty statement might indicate a superfluous semicolon."/>
+        </module>
+
+        <module name="HiddenField">
+            <property name="ignoreConstructorParameter" value="true"/>
+            <property name="ignoreSetter" value="true"/>
+            <message key="hidden.field" value="The local (or parameter) variable ''{0}'' has the same name as an instance variable. Use a different name."/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="BOR, BOR_ASSIGN"/>
+            <message key="illegal.token" value="Did you mean to use the conditional OR operator (''||'') instead of the bitwise OR operator (''|'') ?"/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="BAND, BAND_ASSIGN"/>
+            <message key="illegal.token" value="Did you mean to use the conditional AND operator (''&amp;&amp;'') instead of the bitwise AND operator (''&amp;'') ?"/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="BXOR, BXOR_ASSIGN"/>
+            <message key="illegal.token" value="Did you mean to use ''Math.pow()'' instead of the bitwise XOR operator (''^'') ?"/>
+        </module>
+
+<!--  triggers too many warnings
+        <module name="IllegalToken">
+            <property name="tokens" value="TYPECAST"/>
+            <message key="illegal.token" value="Avoid typecasts whenever possible."/>
+        </module>
+-->
+
+        <module name="InnerAssignment"/>
+        <module name="ModifiedControlVariable">
+            <message key="modified.control.variable" value="Control variable ''{0}'' is modified inside loop."/>
+        </module>
+
+        <module name="SimplifyBooleanExpression">
+            <message key="simplify.expression" value="Boolean expression can be simplified, e.g., use ''if (!isEmpty)'' instead of ''if (isEmpty == false)''."/>
+        </module>
+
+        <module name="SimplifyBooleanReturn">
+            <message key="simplify.boolreturn" value="Conditional logic can be removed in return statement, e.g., use ''return x >= 0'' instead of ''if (x >= 0) return true; else return false;''."/>
+        </module>
+
+        <module name="StringLiteralEquality">
+            <message key="string.literal.equality" value="Compare string literals using ''equals()'', not ''{0}''."/>
+        </module>
+
+        <module name="NestedForDepth">
+            <property name="max" value="4"/>
+        </module>
+        <module name="NestedIfDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="NestedTryDepth">
+            <property name="max" value="1"/>
+        </module>
+        <module name="NoClone"/>
+        <module name="NoFinalizer"/>
+        <module name="SuperClone"/>
+        <module name="SuperFinalize"/>
+
+        <!-- Don't allow variables to be declared of type float -->
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="float"/>
+            <message key="illegal.type" value="Use the primitive type ''double'' instead of the primitive type ''float''."/>
+        </module>
+
+        <!-- Don't allow variables to be declared of wrapper types -->
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Byte, Byte"/>
+            <message key="illegal.type" value="Use the primitive type ''byte'' instead of the wrapper type ''Byte''."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Float, Float"/>
+            <message key="illegal.type" value="Use the primitive type ''float'' instead of the wrapper type ''Float''."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Short, Short"/>
+            <message key="illegal.type" value="Use the primitive type ''short'' instead of the wrapper type ''Short''."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Long, Long"/>
+            <message key="illegal.type" value="Use the primitive type ''long'' instead of the wrapper type ''Long''."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Character, Character"/>
+            <message key="illegal.type" value="Use the primitive type ''char'' instead of the wrapper type ''Character''."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Boolean, Boolean"/>
+            <message key="illegal.type" value="Use the primitive type ''boolean'' instead of the wrapper type ''Boolean''."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Double, Double"/>
+            <message key="illegal.type" value="Use the primitive type ''double'' instead of the wrapper type ''Double''."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Integer, Integer"/>
+            <message key="illegal.type" value="Use the primitive type ''int'' instead of the wrapper type ''Integer''."/>
+        </module>
+
+        <module name="DeclarationOrder">
+            <message key="declaration.order.constructor" value="Constructor definition in wrong order. The preferred order is [static variables, instance variables, constructors, methods]."/>
+            <message key="declaration.order.method" value="Method definition in wrong order. The preferred order is [static variables, instance variables, constructors, methods]."/>
+            <message key="declaration.order.instance" value="Instance variable definition in wrong order. The preferred order is [static variables, instance variables, constructors, methods]."/>
+            <message key="declaration.order.access" value="Variable definition out of order. The preferred order is [public, protected, package, and private]."/>
+            <message key="declaration.order.static" value="Static variable definition in wrong order. The preferred order is [static variables, instance variables, constructors, methods]."/>
+        </module>
+
+<!--
+        <module name="ParameterAssignment">
+            <message key="parameter.assignment" value="Assignment of parameter ''{0}'' is not allowed. Instead, define a local variable."/>
+        </module>
+-->
+
+        <module name="DefaultComesLast"/>
+        <module name="FallThrough"/>
+        <module name="OneStatementPerLine"/>
+
+        <module name="IllegalTokenText">
+            <property name="tokens" value="NUM_FLOAT, NUM_DOUBLE"/>
+            <property name="format" value="^\..*"/>
+            <message key="illegal.token.text" value="Use at least one digit to the left of the decimal point. For example, use the literal ''0.5'' instead of ''.5''."/>
+        </module>
+
+        <module name="IllegalTokenText">
+            <property name="tokens" value="NUM_INT,NUM_LONG"/>
+            <property name="format" value="^0[^lx]"/>
+            <property name="ignoreCase" value="true"/>
+            <message key="illegal.token.text" value="A leading 0 in an integer literal signifies that it is an octal (base-8) integer."/>
+        </module>
+
+        <!-- Checks that // and /* comments are followed by whitespace. -->
+        <module name="IllegalTokenText">
+            <property name="tokens" value="COMMENT_CONTENT"/>
+            <property name="format" value="^[\*/]*[A-Za-z0-9]"/>
+            <message key="illegal.token.text" value="The ''//'' or ''/*'' is not immediately followed by whitespace."/>
+        </module>
+
+        <!-- Checks that comments are not empty. -->
+        <module name="IllegalTokenText">
+           <property name="tokens" value="COMMENT_CONTENT"/>
+           <property name="format" value="^\s*$"/>
+            <message key="illegal.token.text" value="The comment is empty."/>
+        </module>
+
+<!--
+        <module name="UnnecessaryParentheses"/>
+        <module name="ArrayTrailingComma"/>
+        <module name="EqualsAvoidsNull"/>
+        <module name="EqualsHashCode"/>    findbugs catches this already
+        <module name="FinalLocalVariable"/>
+        <module name="IllegalInstantiation"/>
+        <module name="PackageDeclaration"/>
+        <module name="ReturnCount"/>
+        <module name="ExplicitInitialization"/>
+        <module name="MissingCtor"/>
+        <module name="MultipleStringLiterals"/>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="RequireThis"/>
+        <module name="VariableDeclarationUsageDistance"/>
+        <module name="OverloadMethodsDeclarationOrder"/>
+        <module name="MagicNumber">
+            <property name="tokens" value="NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG"/>
+            <property name="ignoreNumbers" value="-256, -128, -100, -64, -32, -16, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, -0.5, -0.25, 0, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 32, 64, 100, 128, 256, 512, 1024, 32768"/>
+            <message key="magic.number" value="''{0}'' looks like a hard-coded value. This should be made a constant variable with a symbolic name (such as AVOGADROS_NUMBER)."/>
+        </module>
+        <module name="MissingSwitchDefault">
+            <message key="missing.switch.default" value="A switch statement must contain a ''default'' clause."/>
+        </module>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Headers                                                                     -->
+        <!-- http://checkstyle.sourceforge.net/config_header.html                        -->
+        <!-- =========================================================================== -->
+
+<!--
+        <module name="Header"/>
+        <module name="RegexpHeader"/>
+
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Imports                                                                     -->
+        <!-- http://checkstyle.sourceforge.net/config_imports.html                       -->
+        <!-- =========================================================================== -->
+
+        <module name="AvoidStaticImport">
+            <message key="import.avoidStatic" value="Do not use static imports."/>
+        </module>
+
+        <module name="RedundantImport">
+            <message key="import.same" value="Unnecessary import statement for ''{0}'' becaue it is in the same package as this class."/>
+            <message key="import.lang" value="Unnecessary import statement for ''{0}'' because it is from the package ''java.lang''."/>
+            <message key="import.duplicate" value="Duplicate import statement for ''{1}''."/>
+        </module>
+
+        <module name="UnusedImports">
+            <message key="import.unused" value="Unused import statement for ''{0}''."/>
+        </module>
+
+        <module name="AvoidStarImport">
+            <message key="import.avoidStar" value="Do not use .* in import statements."/>
+        </module>
+
+<!--
+
+        <module name="ImportOrder"/>
+        <module name="ImportControl"/>
+        <module name="CustomImportOrder"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Javadoc comments                                                            -->
+        <!-- http://checkstyle.sourceforge.net/config_javadoc.html                       -->
+        <!-- =========================================================================== -->
+
+<!--    Running time increases substantially with Javadoc checks -->
+<!--
+        <module name="JavadocStyle"/>
+        <module name="NonEmptyAtclauseDescription"/>
+        <module name="AtclauseOrder"/>
+        <module name="JavadocPackage"/>
+        <module name="JavadocType"/>
+        <module name="JavadocMethod"/>
+        <module name="JavadocVariable"/>
+        <module name="WriteTag"/>
+        <module name="SummaryJavadoc"/>
+        <module name="JavadocParagraph"/>
+        <module name="SingleLineJavadoc"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Metrics                                                                     -->
+        <!-- http://checkstyle.sourceforge.net/config_metrics.html                       -->
+        <!-- =========================================================================== -->
+
+<!--
+        <module name="BooleanExpressionComplexity"/>
+        <module name="ClassDataAbstractionCoupling"/>
+        <module name="ClassFanOutComplexity"/>
+        <module name="CyclomaticComplexity"/>
+        <module name="NPathComplexity"/>
+        <module name="JavaNCSS"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Miscellaneous checks                                                        -->
+        <!-- http://checkstyle.sourceforge.net/config_misc.html                          -->
+        <!-- =========================================================================== -->
+        <module name="TodoComment"/>
+
+        <module name="UpperEll">
+            <message key="upperEll" value="Use an uppercase L instead of a lowercase l to specify a literal of type long."/>
+        </module>
+
+        <module name="ArrayTypeStyle">
+            <message key="array.type.style" value="The square brackets must appear as part of the type at the beginning of the declaration, e.g., ''boolean[][] isOpen;''."/>
+        </module>
+
+        <module name="OuterTypeFilename">
+            <message key="type.file.mismatch" value="The name of the outer type and the file do not match. For example, the class Point must be in a file named Point.java."/>
+        </module>
+
+<!--
+        <module name="UncommentedMain"/>
+        <module name="FinalParameters"/>
+        <module name="Indentation"/>
+        <module name="TrailingComment"/>
+        <module name="AvoidEscapedUnicodeCharacters"/>
+-->
+
+        <module name="DescendantToken">
+            <property name="tokens" value="LITERAL_ASSERT"/>
+            <property name="limitedTokens" value="ASSIGN,DEC,INC,POST_DEC,
+                POST_INC,PLUS_ASSIGN,MINUS_ASSIGN,STAR_ASSIGN,DIV_ASSIGN,MOD_ASSIGN,
+                BSR_ASSIGN,SR_ASSIGN,SL_ASSIGN,BAND_ASSIGN,BXOR_ASSIGN,BOR_ASSIGN"/>
+            <property name="maximumNumber" value="0"/>
+            <property name="maximumMessage" value="Assert statements must not produce side effects."/>
+        </module>
+
+        <module name="DescendantToken">
+            <property name="tokens" value="EQUAL,NOT_EQUAL"/>
+            <property name="limitedTokens" value="LITERAL_THIS,LITERAL_NULL"/>
+            <property name="maximumNumber" value="1"/>
+            <property name="maximumDepth" value="1"/>
+            <property name="sumTokenCounts" value="true"/>
+            <property name="maximumMessage" value="Do not compare ''this'' with ''null''; it is never null."/>
+        </module>
+
+        <!-- =========================================================================== -->
+        <!-- Modifiers                                                                   -->
+        <!-- http://checkstyle.sourceforge.net/config_modifier.html                      -->
+        <!-- =========================================================================== -->
+
+        <module name="ModifierOrder">
+            <message key = "mod.order" value = "The modifier ''{0}'' is out of order. The preferred order is [''public'', ''protected'', ''private'', ''abstract'', ''static'', ''final'', ''transient'', ''volatile'', ''synchronized'', ''native'', and ''strictfp'']."/>
+        </module>
+
+        <!-- removed CTOR_DEF for public constructors in private nested classes -->
+        <module name="RedundantModifier">
+            <property name="tokens" value="METHOD_DEF,VARIABLE_DEF,ANNOTATION_FIELD_DEF,
+                                           INTERFACE_DEF,CLASS_DEF,ENUM_DEF"/>
+        </module>
+
+        <!-- =========================================================================== -->
+        <!-- Naming conventions                                                          -->
+        <!-- http://checkstyle.sourceforge.net/config_naming.html                        -->
+        <!-- =========================================================================== -->
+
+        <!-- MODIFIED TO ALLOW FINAL VARIABLES TO BE ALL UPPER-CASE    -->
+        <!-- MODIFIED TO ALLOW TYPE PARAMETERS TO BE LIKE CLASS NAMES  -->
+
+        <!-- static final field -->
+        <module name="ConstantName">
+            <message key="name.invalidPattern" value="The constant ''{0}'' must be ALL_UPPERCASE, with words separated by underscores."/>
+        </module>
+
+        <!-- includes catch parameters -->
+        <module name="LocalFinalVariableName">
+            <property name="format" value="^([a-z][a-zA-Z0-9]*|^[A-Z][A-Z_0-9]*)$"/>
+            <message key="name.invalidPattern" value="The local final variable ''{0}'' must start with a lowercase letter and use camelCase (or be ALL_UPPERCASE if it is a constant)."/>
+        </module>  
+
+        <!-- local variaables, allow camelCase or ALL_UPPERCASE of two or more characters -->
+        <module name="LocalVariableName">
+            <property name="format" value="^([a-z][a-zA-Z0-9]*|^[A-Z][A-Z_0-9]+|SLOPE_ORDER|G)$"/>
+            <message key="name.invalidPattern" value="The local variable ''{0}'' must start with a lowercase letter and use camelCase."/>
+        </module>
+
+        <!-- non static field (instance variables), must be camelCase -->
+        <module name="MemberName">
+            <property name="format" value="^([a-z][a-zA-Z0-9]*|G)$"/>
+            <message key="name.invalidPattern" value="The instance variable ''{0}'' must start with a lowercase letter and use camelCase."/>
+        </module>
+
+        <!-- ^[a-z][a-zA-Z0-9]*$ -->
+        <module name="MethodName">
+            <message key="name.invalidPattern" value="The method ''{0}'' must start with a lowercase letter and use camelCase."/>
+            <message key="method.name.equals.class.name" value="The method name ''{0}'' must not be identical to the class name. Remove the return type if you intended to define a constructor instead of a method."/>
+        </module>
+
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+            <message key="name.invalidPattern" value="The package ''{0}'' must be lowercase, with package components separated by dots."/>
+        </module>
+
+        <module name="ParameterName">
+            <property name="format" value="^([a-z][a-zA-Z0-9]*|G)$"/>
+            <message key="name.invalidPattern" value="The parameter variable ''{0}'' must start with a lowercase letter and use camelCase."/>
+        </module>
+
+        <!-- static non-final field -->
+        <!-- ^[a-z][a-zA-Z0-9]*$    -->
+        <module name="StaticVariableName">
+            <message key="name.invalidPattern" value="The static variable ''{0}'' must start with a lowercase letter and use camelCase. If you intended ''{0}'' to be a constant, add the modifier ''final'' immediately after ''static'' and use ALL_UPPERCASE."/>
+        </module>
+
+        <!-- ^[A-Z][a-zA-Z0-9]*$ -->
+        <module name="TypeName">
+            <message key="name.invalidPattern" value="The class ''{0}'' must start with an uppercase letter and use CamelCase."/>
+        </module>
+
+        <module name="ClassTypeParameterName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+            <message key="name.invalidPattern" value="The type parameter ''{0}'' must either be a single uppercase letter or start with an uppercase letter and use CamelCase."/>
+        </module>
+
+        <module name="MethodTypeParameterName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+            <message key="name.invalidPattern" value="The type parameter ''{0}'' must either be a single uppercase letter or start with an uppercase letter and use CamelCase."/>
+        </module>
+
+        <module name="InterfaceTypeParameterName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+            <message key="name.invalidPattern" value="The type parameter ''{0}'' must either be a single uppercase letter or start with an uppercase letter and use CamelCase."/>
+        </module>
+
+<!--
+	<module name="AbstractClassName"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Regexp                                                                      -->
+        <!-- http://checkstyle.sourceforge.net/config_regexp.html                        -->
+        <!-- =========================================================================== -->
+
+        <!-- Checks for calls to StdDraw.show(int). -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="StdDraw\.show\(\d+\)"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="The method ''StdDraw.show(int)'' is deprecated. Use ''StdDraw.enableDoubleBuffering()'', ''StdDraw.show()'', and ''StdDraw.pause(int)'' instead."/>
+        </module>
+
+        <!-- check for Math.pow(*, 3) and Math.pow(*, 0.5) -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="Math\.pow\([^,]*, ?3(\.0?)?\)"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="''Math.pow(x, 3)'' is slow. Use ''x*x*x'' instead."/>
+        </module>
+
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="Math\.pow\([^,]*, ?0?\.5\)"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="''Math.pow(x, 0.5)'' is slow. Use ''Math.sqrt(x)'' instead."/>
+        </module>
+
+<!--
+        <module name="Regexp"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Size violations                                                             -->
+        <!-- http://checkstyle.sourceforge.net/config_sizes.html                         -->
+        <!-- =========================================================================== -->
+
+        <!-- Check that length of line is at most 128 characters. -->
+        <module name="LineLength">
+            <property name="max" value="128"/>
+            <message key="maxLineLen" value="Line is longer than {0,number,integer} characters (currently {1,number,integer})."/>
+        </module>
+
+        <module name="MethodLength">
+            <property name="max" value="150"/>
+            <property name="countEmpty" value="true"/>
+            <message key="maxLine.method" value="Method length is {0,number,integer} lines (max allowed is {1,number,integer})."/>
+        </module>
+
+        <module name="AnonInnerLength"/>
+        <module name="ParameterNumber"/>
+        <module name="OuterTypeNumber"/>
+        <module name="MethodCount"/>
+
+<!--
+        <module name="ExecutableStatementCount"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- Whitespace                                                                  -->
+        <!-- http://checkstyle.sourceforge.net/config_whitespace.html                    -->
+        <!-- =========================================================================== -->
+        <module name="GenericWhitespace"/>
+        <module name="EmptyForInitializerPad"/>
+        <module name="EmptyForIteratorPad"/>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter">
+           <property name="tokens" value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS, UNARY_PLUS"/>
+         </module>
+        <module name="NoWhitespaceBefore"/>
+        <module name="ParenPad"/>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter">
+            <message key="ws.typeCast" value="Typecast is not followed by whitespace."/>
+        </module>
+
+        <module name="WhitespaceAround">
+           <!-- removed PLUS, MINUS, STAR, DIV -->
+           <!-- removed GENERIC_START, GENERIC_END -->
+           <property name="tokens"
+            value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, 
+                   BSR_ASSIGN, BXOR, BXOR_ASSIGN, COLON,  DIV_ASSIGN,
+                   EQUAL, GE, GT, LAND, LCURLY, LE, LITERAL_ASSERT,
+                   LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY,
+                   LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SYNCHRONIZED,
+                   LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS_ASSIGN, MOD,
+                   MOD_ASSIGN, NOT_EQUAL, PLUS_ASSIGN, QUESTION, RCURLY,
+                   SL, SLIST, SL_ASSIGN, SR, SR_ASSIGN, STAR_ASSIGN,
+                   TYPE_EXTENSION_AND, WILDCARD_TYPE"/>
+        </module>
+
+        <!-- seems buggy if used with class in default package. seems to need VARIABLE_DEF for it to behave properly? -->
+<!--
+        <module name="EmptyLineSeparator">
+            <property name="tokens" value="CTOR_DEF, VARIABLE_DEF"/>
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <message key="empty.line.separator" value="Constructor must be separated from previous statement with a blank line."/>
+        </module>
+        <module name="EmptyLineSeparator">
+            <property name="tokens" value="METHOD_DEF, VARIABLE_DEF"/>
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <message key="empty.line.separator" value="Method must be separated from previous statement with a blank line."/>
+        </module>
+        <module name="EmptyLineSeparator">
+            <property name="tokens" value="CLASS_DEF, VARIABLE_DEF"/>
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <message key="empty.line.separator" value="Class definition must be separated from previous statement or header with a blank line."/>
+        </module>
+
+        <module name="EmptyLineSeparator">
+            <property name="tokens" value="IMPORT, INTERFACE_DEF, VARIABLE_DEF, METHOD_DEF, PACKAGE_DEF, CTOR_DEF, STATIC_INIT, INSTANCE_INIT"/>
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <message key="empty.line.separator" value="''{0}'' must be separated from previous statement with a blank line."/>
+        </module>
+-->
+
+<!--
+        <module name="OperatorWrap">
+            <property name="option" value="eol"/>
+            <message key="line.previous" value="''{0}'' must be at the end of the previous line."/>
+        </module>
+        <module name="NoLineWrap"/>
+        <module name="SeparatorWrap"/>
+-->
+
+        <!-- =========================================================================== -->
+        <!-- COURSE SPECIFIC CHECKS                                                      -->
+        <!-- =========================================================================== -->
+
+        <!-- Don't allow suppressing of compiler warnings. -->
+        <module name="SuppressWarnings">
+           <!-- <property name="format" value="^unchecked$|^unused$"/> -->
+           <property name="format" value=".*"/>
+           <property name="tokens"
+              value="
+              CLASS_DEF,INTERFACE_DEF,ENUM_DEF,
+              ANNOTATION_DEF,ANNOTATION_FIELD_DEF,
+              ENUM_CONSTANT_DEF,METHOD_DEF,CTOR_DEF,
+              PARAMETER_DEF,VARIABLE_DEF
+          "/>
+            <message key="suppressed.warning.not.allowed" value="Do not suppress warnings in this course."/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="LITERAL_NATIVE, STRICTFP, LITERAL_VOLATILE, LITERAL_TRANSIENT, LITERAL_SYNCHRONIZED"/>
+            <message key="illegal.token" value="Do not use the keyword ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="LITERAL_THROWS, LITERAL_SUPER, LITERAL_PROTECTED, ABSTRACT"/>
+            <message key="illegal.token" value="Do not use the keyword ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="STATIC_INIT"/>
+            <message key="illegal.token" value="Do not use static initializers in this course."/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="PACKAGE_DEF"/>
+            <message key="illegal.token" value="Do not define packages in this course."/>
+        </module>
+
+        <module name="IllegalToken">
+            <property name="tokens" value="LITERAL_INSTANCEOF"/>
+            <message key="illegal.token" value="Do not use the ''instanceof'' operator in this course. Use ''getClass()'' to compare classes."/>
+        </module>
+
+        <!-- Avoid masking of OutOfMemoryError or NullPointerExceptionError -->
+        <module name="IllegalCatch">
+            <message key="illegal.catch" value="Do not catch ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalThrows">
+            <message key="illegal.throw" value="Do not throw ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalType">
+            <property name="illegalClassNames" value="java.lang.Class, Class"/>
+            <message key="illegal.type" value="Do not use reflection in this course."/>
+        </module>
+
+        <!-- Disallow java.io and other packages that COS 226 students must not use -->
+        <!-- Disallowing the package also disallows all subpackages. -->
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="java.awt.datatransfer, java.awt.dnd, java.awt.event, java.awt.font, java.awt.im, java.awt.image, java.awt.print"/>
+            <message key="import.illegal" value="Do not import ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="java.util.concurrent, java.util.jar, java.util.logging, java.util.prefs, java.util.regexp, java.util.spi, java.util.stream, java.util.zip"/>
+            <message key="import.illegal" value="Do not import ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="java.applet, java.beans, java.math, java.net, java.nio, java.rmi, java.security, java.sql, java.text, javax, org, sun"/>
+            <message key="import.illegal" value="Do not import ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="java.lang.annotation, java.lang.invoke, java.lang.management, java.lang.ref, java.lang.reflect"/>
+            <message key="import.illegal" value="Do not import ''{0}'' in this course."/>
+        </module>
+
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="edu.princeton.cs.introcs, java.io"/>
+            <message key="import.illegal" value="Do not import ''{0}'' in this course. Instead, use the I/O libraries in edu.princeton.cs.algs4."/>
+        </module>
+
+        <!-- Checks for calls to System.exit(). -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="System\.exit"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="Do not call ''System.exit()'' in this course."/>
+        </module>
+
+        <!-- Checks for calls to Math.random(). -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="Math\.random"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="Do not call ''Math.random()'' in this course. Instead, use an appropriate method from ''StdRandom'', such as ''StdRandom.uniform()''."/>
+        </module>
+
+
+    </module>
+</module>

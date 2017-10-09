@@ -1,0 +1,26 @@
+INDEX VERSION 1.129+C:\Users\Fidel\OneDrive\Studying\Algorithms\Assignments\.metadata\.plugins\org.eclipse.jdt.core
+3878457715.index
+486699731.index
+1004716384.index
+3700244039.index
+3226197626.index
+2927524569.index
+2167310551.index
+3256285438.index
+188619105.index
+12450494.index
+2017505986.index
+193432152.index
+1583927216.index
+374731158.index
+3789747049.index
+3681335767.index
+4166838873.index
+3119455041.index
+2831536327.index
+1847969816.index
+3172068124.index
+1904741536.index
+1866706089.index
+2312443017.index
+375126478.index

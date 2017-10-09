@@ -1,0 +1,141 @@
+<FindBugsFilter>
+     <!-- Bug descriptions: http://findbugs.sourceforge.net/bugDescriptions.html  -->
+
+     <!-- Match all violations. -->
+     <!-- But ignore these:
+            * comparator should be serializable
+            * something else dealing with serialization
+            * format string should use %n instead of /n
+            * inner class should be static (awkard, but possible with generics)
+            * using entrySet() is more efficient than keySet(), but it is awkward
+            * class defines compareTo() and inherits equals()
+       -->
+     <Match classregex=".*" >
+       <BugPattern name="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE,
+                         SE_BAD_FIELD,
+                         VA_FORMAT_STRING_USES_NEWLINE,
+                         SIC_INNER_SHOULD_BE_STATIC,
+                         WMI_WRONG_MAP_ITERATOR,
+                         EQ_COMPARETO_USE_OBJECT_EQUALS" />
+     </Match>
+
+     <!--  ***********************************************************************  -->
+     <!--  STDLIB.JAR EXCEPTIONS                                                    -->
+     <!--  ***********************************************************************  -->
+
+     <!-- Exclude StdDraw write to static variable. -->
+     <Match classregex=".*StdDraw" >
+       <BugPattern name="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" />
+     </Match>
+
+     <Match classregex=".*StdDraw3D.*" >
+     </Match>
+
+     <!--  ***********************************************************************  -->
+     <!--  INTRO TO PROGRAMMING IN JAVA EXCEPTIONS                                  -->
+     <!--  ***********************************************************************  -->
+
+     <Match classregex=".*Bug.*" >
+     </Match>
+
+     <Match classregex="Confusion" >
+       <BugPattern name="DLS_OVERWRITTEN_INCREMENT" />
+     </Match>
+
+     <Match classregex="Arrays" >
+       <BugPattern name="DMI_INVOKING_TOSTRING_ON_ARRAY" />
+     </Match>
+
+     <Match classregex="PhoneNumber" >
+       <BugPattern name="SA_LOCAL_SELF_COMPARISON" />
+     </Match>
+
+     <Match classregex="NoBaseCase|NoConvergence" >
+       <BugPattern name="IL_INFINITE_RECURSIVE_LOOP" />
+     </Match>
+
+     <!-- Exclude Gaussian.Phi(), Harmonic.Hsmall(), ErrorFunction.Phi(). -->
+     <Match classregexp="Harmonic|ErrorFunction|Gaussian" >
+       <BugPattern name="NM_METHOD_NAMING_CONVENTION" />
+     </Match>
+
+     <!-- Exclude Gaussian.Phi() uppercase method name and test for floating point equality. -->
+     <Match class="Gaussian" >
+       <BugPattern name="FE_FLOATING_POINT_EQUALITY" />
+     </Match>
+
+     <!-- generating random integers before StdRandom.uniform() is introduced -->
+     <Match classregex="Coupon|CouponCollector|TwentyQuestions|Craps|Functions|Mozart|Birthday|Birthdays|RollDie|SumOfTwoDice|RandomStudent|Sicherman|Chaos|DiscreteDistribution|MonteHall" >
+       <BugPattern name="DM_NEXTINT_VIA_NEXTDOUBLE" />
+     </Match>
+
+     <!-- string concatenation before StringBuffer is introduced -->
+     <Match classregex="RulerN|DigitReverser|Loops|ThueMorse|Ordinal|DeBruijn|Soundex|Repeat|Quote|CircularQuote" >
+       <BugPattern name="SBSC_USE_STRINGBUFFER_CONCATENATION" />
+     </Match>
+
+     <!-- we are measuring side effect of elapsed time -->
+     <Match classregex="DoublingTest" >
+       <BugPattern name="DLS_DEAD_LOCAL_STORE" />
+     </Match>
+
+
+     <!--  ***********************************************************************  -->
+     <!--  ALGS4.JAR EXCEPTIONS                                                     -->
+     <!--  ***********************************************************************  -->
+
+     <!-- techincally, need (edu.princeton.cs.algs4.)? instead of .* for package version -->
+     <!-- technically, need \. instead of . -->
+     <Match classregex=".*(BellmanFordSP|DijkstraSP|DynamicProgrammingSP)" >
+       <BugPattern name="FE_FLOATING_POINT_EQUALITY" />
+     </Match>
+
+     <Match classregex="Autoboxing" >
+     </Match>
+
+     <Match classregex="BrokenShuffle" >
+       <BugPattern name="DM_NEXTINT_VIA_NEXTDOUBLE" />
+     </Match>
+
+     <Match classregex=".*RabinKarp" >
+       <BugPattern name="UPM_UNCALLED_PRIVATE_METHOD" />
+     </Match>
+
+     <Match classregex=".*CovariantPhoneNumber" >
+       <BugPattern name="EQ_SELF_USE_OBJECT" />
+     </Match>
+
+     <Match classregex=".*MemoryOf.*" >
+       <BugPattern name="DM_NUMBER_CTOR" />
+     </Match>
+
+     <Match classregex="Concatenate" >
+       <BugPattern name="SBSC_USE_STRINGBUFFER_CONCATENATION" />
+     </Match>
+
+     <Match classregex="Student" >
+       <BugPattern name="SA_LOCAL_SELF_COMPARISON, EC_UNRELATED_TYPES EC" />
+     </Match>
+
+     <!--  ***********************************************************************  -->
+     <!--  PROGRAMMING ASSIGNMENT EXCEPTIONS                                        -->
+     <!--  ***********************************************************************  -->
+
+     <Match classregex="Board" >
+       <BugPattern name="HE_EQUALS_USE_HASHCODE" />
+     </Match>
+
+     <!-- Exclude compare() by slope order in Point.java on collinear assignment -->
+     <!-- It produces a warning even though it properly handles NaN              -->
+     <Match classregex="Point.*" >
+       <BugPattern name="CO_COMPARETO_INCORRECT_FLOATING" />
+     </Match>
+
+     <!--  ***********************************************************************  -->
+     <!--  JAVA MATRIX PACKAGE                                                      -->
+     <!--  ***********************************************************************  -->
+     <Match classregex="Jama\..*" >
+     </Match>
+
+
+</FindBugsFilter>
