@@ -47,7 +47,6 @@
 ;; We will test eval-under-env by calling it directly even though
 ;; "in real life" it would be a helper function of eval-exp.
 (define (eval-under-env e env)
-  (begin ;(print e)(print "env--") (print env) (print "---------------------------------------") 
   (cond [(var? e) 
          (envlookup env (var-string e))]
         [(int? e) e]
@@ -75,31 +74,25 @@
          (let ([funexp1 (eval-under-env (call-funexp e) env)]
                [v (eval-under-env (call-actual e) env)])
            (if (closure? funexp1)
-               (if (value? v)
-                   (let ([env0 (closure-env funexp1)]
-                         [fun0 (closure-fun funexp1)])
-                     (if (fun? fun0)
-                         (let* ([name (fun-nameopt fun0)]
-                               [arg (fun-formal fun0)]
-                               [env0 (cons (cons arg v) env0)])
-                             (if name
-                                 (eval-under-env (fun-body fun0) (cons (cons name funexp1) env0))
-                                 (eval-under-env (fun-body fun0) env0)))
-                         (error "MUPL call applied to non-fun")))
-                   (begin (print v)(error "MUPL call arg non-value")))
+               (let ([env0 (closure-env funexp1)]
+                     [fun0 (closure-fun funexp1)])
+                 (let* ([name (fun-nameopt fun0)]
+                        [arg (fun-formal fun0)]
+                        [env0 (cons (cons arg v) env0)])
+                   (if name
+                       (eval-under-env (fun-body fun0) (cons (cons name funexp1) env0))
+                       (eval-under-env (fun-body fun0) env0))))
                (error "MUPL call applied to non-closure")))]
         [(mlet? e)
          (let ([v (eval-under-env (mlet-e e) env)])
-           (if (value? v)
-               (eval-under-env (mlet-body e) (cons (cons (mlet-var e) v) env))
-               (error "MUPL mlet applied to non-value")))]
+           (eval-under-env (mlet-body e) (cons (cons (mlet-var e) v) env)))]
         [(apair? e)
          (apair (eval-under-env (apair-e1 e) env) (eval-under-env (apair-e2 e) env))]
         [(fst? e)
          (let ([pair (eval-under-env (fst-e e) env)])
            (if (apair? pair)
                (eval-under-env (apair-e1 pair) env)
-               (begin (print e) (print pair)(error "MUPL fst applied to non-apair"))))]
+               (error "MUPL fst applied to non-apair")))]
         [(snd? e)
          (let ([pair (eval-under-env (snd-e e) env)])
            (if (apair? pair)
@@ -111,7 +104,7 @@
              (int 1)
              (int 0))]
         [(closure? e) e]
-        [#t (error (format "bad MUPL expression: ~v" e))])))
+        [#t (error (format "bad MUPL expression: ~v" e))]))
 
 (define (value? e)
   (or (int? e)
@@ -152,11 +145,9 @@
 
 (define mupl-mapAddN 
   (mlet "map" mupl-map
-        (fun #f "i"
-             (fun #f "xs"
-                  (call (call (var "map")
-                              (fun #f "x" (add (var "x") (var "i"))))
-                        (var "xs"))))))
+        (fun #f "x"
+             (call (var "map") (fun #f "y"
+                                    (add (var "x") (var "y")))))))
 
 ;; Challenge Problem
 
