@@ -10,7 +10,7 @@
 * 学习科学 Learning Sciences
 * 价值投资 Value Investing 
 
-这里主要存放个人的习题解答、笔记、练习性代码等资料，**知识结构整理放在[Wiki](https://github.com/yifeitao/learn/wiki)上**。
+这里主要存放个人的习题解答、笔记、练习性代码等资料，**一些尝试性的知识结构整理可以参考[Wiki](https://github.com/yifeitao/learn/wiki)**。
 
 资料列表：
 * [coursera-algorithms-part1 coursera 算法 Part1](https://github.com/yifeitao/learn/tree/master/coursera-algorithms-part1)
@@ -19,6 +19,7 @@
 * [coursera-programming-languages coursera 程序设计语言](https://github.com/yifeitao/learn/tree/master/coursera-programming-languages)
 * [ntuml 台湾大学 机器学习](https://github.com/yifeitao/learn/tree/master/ntuml)
 * [udacity-cs212 udacity 计算机程序设计](https://github.com/yifeitao/learn/tree/master/udacity-cs212)
+* [学习科学的读书笔记](https://github.com/yifeitao/learn/tree/master/learning-sciences/reading-notes)
 
 `🚀Live and Learn 🕕Since 2017`
 
