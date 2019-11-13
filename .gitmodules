@@ -1,0 +1,3 @@
+[submodule "SimpleProgrammingProblems"]
+	path = SimpleProgrammingProblems
+	url = https://github.com/yifeitao/SimpleProgrammingProblems.git
