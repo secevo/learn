@@ -5,14 +5,15 @@
 
 出于这两个目的，遵照活到老，学到老的理念，虽然本人早已不是学生，但本项目将会一直更新下去。
 
-当前（2019年~2024年）关注的主要领域：
+当前（2019年~2025年）关注的主要领域：
+* 价值投资 Value Investing 
 * 人工智能 Artificial Intelligence
 * 学习科学 Learning Sciences
-* 价值投资 Value Investing 
 
 这里主要存放个人的习题解答、笔记、练习性代码等资料。
 
 资料列表：
+* [财务报表分析与证券投资第5版中文版习题解答](https://github.com/ifeitao/penman5e)
 * [coursera-algorithms-part1 coursera 算法 Part1](https://github.com/yifeitao/learn/tree/master/coursera-algorithms-part1)
 * [coursera-cryptocurrency coursera 比特币和数字货币技术](https://github.com/yifeitao/learn/tree/master/coursera-cryptocurrency)
 * [coursera-machine-learning coursera 机器学习](https://github.com/yifeitao/learn/tree/master/coursera-machine-learning)
